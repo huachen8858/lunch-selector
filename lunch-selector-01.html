@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunch Selector</title>
+</head>
+<body>
+  <h3>午餐不知道吃什麼嗎？</h3>
+  <div>
+    <p id="info"></p>
+  </div>
+  <button onclick="generateMyLunch()">START</button>
+</body>
+<script>
+  const info = document.querySelector('#info')
+
+  function generateMyLunch() {
+    let option = ""
+    let num = Math.floor((Math.random()*5)+1)
+
+    if (num == 1) {
+      option = "番茄義大利麵"
+    }
+    if (num == 2) {
+      option = "白醬野菇燉飯"
+    }
+    if (num == 3) {
+      option = "蝦仁蛋炒飯"
+    }
+    if (num == 4) {
+      option = "唐揚雞咖哩飯"
+    }
+    if (num == 5) {
+      option = "紅燒牛肉麵"
+    }
+    info.innerHTML = option
+  }
+</script>
+</html>
