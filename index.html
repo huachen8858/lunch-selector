@@ -82,7 +82,7 @@
   </head>
   <body>
     <div class="header">
-      <h1>Eat <span id="result">...</span> for lunch</h1>
+      <h1>今天中午吃&nbsp;<span id="lunchResult">...</span></h1>
     </div>
     <div class="wheel">
       <canvas class="canvas" id="canvas" width="500" height="500"></canvas>
@@ -145,7 +145,8 @@
       // 拿到輸入的午餐選項
       let items = document
         .getElementsByTagName("textarea")[0]
-        .value.split("\n");
+        .value.trim("\n")
+        .split("\n");
 
       let currentDeg = 0;
       let step = 360 / items.length;
@@ -154,8 +155,22 @@
         colors.push(randomColor());
       }
 
+      function createWheel() {
+        items = document
+          .getElementsByTagName("textarea")[0]
+          .value.trim("\n")
+          .split("\n");
+        step = 360 / items.length;
+        colors = [];
+        for (let i = 0; i < items.length + 1; i++) {
+          colors.push(randomColor());
+        }
+        draw();
+      }
+
       draw();
 
+      // 繪製canvas 製作出轉盤
       function draw() {
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius, toRad(0), toRad(360));
@@ -207,6 +222,16 @@
           ctx.le;
           ctx.fillText(items[i], 130, 10);
           ctx.restore();
+
+          // 選到的選項呈現
+          if (
+            startDeg % 360 < 360 &&
+            startDeg > 270 &&
+            endDeg % 360 > 0 &&
+            endDeg % 360 < 90
+          ) {
+            document.querySelector("#lunchResult").innerHTML = items[i];
+          }
         }
       }
 
