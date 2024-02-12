@@ -18,7 +18,7 @@
         padding: 40px;
         color: #fff;
         margin: 0 auto;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
       }
       .header h1,
       span {
@@ -32,7 +32,8 @@
       .center-circle {
         width: 100px;
         height: 100px;
-        box-shadow: 0 0 5px #444444; 
+        /* border: 3px solid hsl(0, 0%, 10%);
+        box-shadow: 0 0 5px #444444; */
         border-radius: 60px;
         background-color: #fff;
         position: absolute;
@@ -54,10 +55,10 @@
         height: 0;
         border-top: 10px solid transparent;
         border-bottom: 10px solid transparent;
-        border-right: 30px solid #ffde21;
+        border-right: 30px solid #fff;
         position: absolute;
         top: 40%;
-        right: -210%;
+        right: -220%;
         transform: translateY((-50%));
       }
       .canvas {
@@ -79,12 +80,10 @@
         font-size: 1rem;
       }
       .inputArea {
-        width: 300px;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin: 40px auto;
-        color: #00184f;
+        margin: 40px 35vh;
       }
     </style>
   </head>
@@ -100,14 +99,13 @@
       </div>
     </div>
     <div class="inputArea" onchange="createWheel()">
-      <div class="info">修改選項</div>
+      <div class="info">請將午餐選項填寫於下方輸入框</div>
       <textarea cols="20" rows="15">
-肉醬義大利麵
+番茄義大利麵
 白醬野菇燉飯
 蝦仁蛋炒飯
 唐揚雞咖哩飯
-紅燒牛肉麵
-乾炒牛河</textarea
+紅燒牛肉麵</textarea
       >
     </div>
 
@@ -165,7 +163,6 @@
         colors.push(randomColor());
       }
 
-      // 建立轉輪
       function createWheel() {
         items = document
           .getElementsByTagName("textarea")[0]
@@ -179,7 +176,6 @@
         draw();
       }
 
-      // 一進頁面先呼叫畫出轉輪
       draw();
 
       // 繪製canvas 製作出轉盤
@@ -191,56 +187,42 @@
         ctx.fill();
 
         let startDeg = currentDeg;
-        // 畫出每個扇形，以開始的角度+step避免重疊
         for (let i = 0; i < items.length; i++, startDeg += step) {
           let endDeg = startDeg + step;
 
           color = colors[i];
           let colorStyle = `rgb(${color.r}, ${color.g}, ${color.b})`;
 
-          // 外框
           ctx.beginPath();
           rad = toRad(360 / step);
           ctx.arc(centerX, centerY, radius - 2, toRad(startDeg), toRad(endDeg));
           let colorStyle2 = `rgb(${color.r - 30}, ${color.g - 30}, ${
             color.b - 30
           })`;
-          ctx.fillStyle = "#fff";
+          ctx.fillStyle = colorStyle2;
           ctx.lineTo(centerX, centerY);
           ctx.fill();
 
-          // 扇形顏色
           ctx.beginPath();
           rad = toRad(360 / step);
           ctx.arc(
             centerX,
             centerY,
-            radius - 10,
+            radius - 30,
             toRad(startDeg),
             toRad(endDeg)
           );
-          ctx.fillStyle = i % 2 === 0 ? "#76b6ff" : "#277bdb";
+          ctx.fillStyle = colorStyle;
           ctx.lineTo(centerX, centerY);
           ctx.fill();
 
-          // 扇形右邊框線
-          ctx.beginPath();
-          ctx.strokeStyle = "#fff";
-          ctx.lineWidth = 2;
-          ctx.moveTo(centerX, centerY);
-          ctx.lineTo(
-            centerX + (radius - 10) * Math.cos(toRad(startDeg)),
-            centerY + (radius - 10) * Math.sin(toRad(startDeg))
-          );
-          ctx.stroke();
-
-          // 扇形中的文字
+          // draw text
           ctx.save();
           ctx.translate(centerX, centerY);
           ctx.rotate(toRad((startDeg + endDeg) / 2));
           ctx.textAlign = "center";
-          if (i % 2 === 0) {
-            ctx.fillStyle = "#333";
+          if (color.r > 150 || color.g > 150 || color.b > 150) {
+            ctx.fillStyle = "#000";
           } else {
             ctx.fillStyle = "#fff";
           }
@@ -260,7 +242,6 @@
         }
       }
 
-      // 旋轉的動畫
       let speed = 0;
       let maxRotation = randomRange(360 * 3, 360 * 6);
       let pause = false;
