@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lunch Selector</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #646464;
+      }
+      .header {
+        padding: 40px;
+        color: #fff;
+        margin: 0 auto;
+        margin-bottom: 40px;
+      }
+      .header h1,
+      span {
+        text-align: center;
+      }
+      .wheel {
+        display: flex;
+        justify-content: center;
+        position: relative;
+      }
+      .center-circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 60px;
+        background-color: #fff;
+        position: absolute;
+        top: 50%;
+        transform: translateY((-50%));
+        text-align: center;
+        cursor: pointer;
+      }
+      .center-circle p {
+        color: #333;
+        font-size: 1.5rem;
+        font-weight: bold;
+        position: absolute;
+        top: 30px;
+        left: 10px;
+      }
+      .triangle {
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 30px solid #fff;
+        position: absolute;
+        top: 50%;
+        right: -220%;
+        transform: translateY((-50%));
+      }
+      textarea {
+        background-color: rgba(228, 228, 228, 0.2);
+        caret-color: #fff;
+        resize: none;
+        color: #fff;
+        letter-spacing: 1px;
+        padding: 10px 20px;
+        font-size: 1rem;
+      }
+      .inputArea {
+        display: flex;
+        justify-content: center;
+        margin: 40px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Eat <span id="result">...</span> for lunch</h1>
+    </div>
+    <div class="wheel">
+      <canvas class="canvas" id="canvas" width="500" height="500"></canvas>
+      <div class="center-circle" onclick="spin()">
+        <p>START</p>
+        <div class="triangle"></div>
+      </div>
+    </div>
+    <div class="inputArea">
+      <textarea cols="20" rows="20">
+番茄義大利麵
+白醬野菇燉飯
+蝦仁蛋炒飯
+唐揚雞咖哩飯
+紅燒牛肉麵
+      </textarea>
+    </div>
+
+    <script>
+      // Utils:
+      // 1.角度轉換弧度
+      function toRad(deg) {
+        return deg * (Math.PI / 180.0);
+      }
+      // 2.生成指定範圍內的隨機整數
+      function randomRange(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+    </script>
+
+    <script>
+      const canvas = document.querySelector("#canvas");
+      const ctx = canvas.getContext("2d");
+      const width = canvas.width;
+      const height = canvas.height;
+
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const radius = width / 2;
+
+    </script>
+  </body>
+</html>
