@@ -12,13 +12,13 @@
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
       body {
-        background-color: #646464;
+        background-color: #333;
       }
       .header {
         padding: 40px;
         color: #fff;
         margin: 0 auto;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
       }
       .header h1,
       span {
@@ -32,8 +32,8 @@
       .center-circle {
         width: 100px;
         height: 100px;
-        border: 3px solid hsl(0, 0%, 10%);
-        box-shadow: 0 0 5px #444444;
+        /* border: 3px solid hsl(0, 0%, 10%);
+        box-shadow: 0 0 5px #444444; */
         border-radius: 60px;
         background-color: #fff;
         position: absolute;
@@ -64,6 +64,12 @@
       .canvas {
         letter-spacing: 1px;
       }
+      .info {
+        color: #fff;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+        text-align: center;
+      }
       textarea {
         background-color: rgba(228, 228, 228, 0.2);
         caret-color: #fff;
@@ -75,8 +81,9 @@
       }
       .inputArea {
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        margin: 40px 0;
+        margin: 40px 35vh;
       }
     </style>
   </head>
@@ -92,7 +99,8 @@
       </div>
     </div>
     <div class="inputArea" onchange="createWheel()">
-      <textarea cols="20" rows="20">
+      <div class="info">請將午餐選項填寫於下方輸入框</div>
+      <textarea cols="20" rows="15">
 番茄義大利麵
 白醬野菇燉飯
 蝦仁蛋炒飯
@@ -218,8 +226,7 @@
           } else {
             ctx.fillStyle = "#fff";
           }
-          ctx.font = "bold 24px Segoe UI";
-          ctx.le;
+          ctx.font = "bold 20px Segoe UI";
           ctx.fillText(items[i], 130, 10);
           ctx.restore();
 
