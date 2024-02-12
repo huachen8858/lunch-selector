@@ -165,6 +165,7 @@
         colors.push(randomColor());
       }
 
+      // 建立轉輪
       function createWheel() {
         items = document
           .getElementsByTagName("textarea")[0]
@@ -178,6 +179,7 @@
         draw();
       }
 
+      // 一進頁面先呼叫畫出轉輪
       draw();
 
       // 繪製canvas 製作出轉盤
@@ -189,6 +191,7 @@
         ctx.fill();
 
         let startDeg = currentDeg;
+        // 畫出每個扇形，以開始的角度+step避免重疊
         for (let i = 0; i < items.length; i++, startDeg += step) {
           let endDeg = startDeg + step;
 
@@ -231,16 +234,15 @@
           );
           ctx.stroke();
 
-          // draw text
+          // 扇形中的文字
           ctx.save();
           ctx.translate(centerX, centerY);
           ctx.rotate(toRad((startDeg + endDeg) / 2));
           ctx.textAlign = "center";
-
           if (i % 2 === 0) {
-            ctx.fillStyle = "#333"; // 偶數背景顏色
+            ctx.fillStyle = "#333";
           } else {
-            ctx.fillStyle = "#fff"; // 奇數背景顏色
+            ctx.fillStyle = "#fff";
           }
           ctx.font = "bold 20px Segoe UI";
           ctx.fillText(items[i], 130, 10);
@@ -258,6 +260,7 @@
         }
       }
 
+      // 旋轉的動畫
       let speed = 0;
       let maxRotation = randomRange(360 * 3, 360 * 6);
       let pause = false;
